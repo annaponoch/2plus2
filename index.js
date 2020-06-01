@@ -1,46 +1,39 @@
-let input1 = document.createElement('input')
-
-let input2 = document.createElement('input')
-
-let button = document.createElement('button')
-button.textContent = 'Розрахувати'
-
-
 let error1 = document.createElement('div')
-	error1.classList.add('error-message')
-	error1.textContent = "це не число"
 let error2 = document.createElement('div')
-	error2.classList.add('error-message')
-	error2.textContent = "це не число"
-
-input1.style.display = input2.style.display = button.style.display = 'block';
+let input1 = document.createElement('input')
+let input2 = document.createElement('input')
+let button = document.createElement('button')
 
 input1 = document.body.appendChild(input1)
 input2 = document.body.appendChild(input2)
 button = document.body.appendChild(button)
+button.textContent = 'Calculate'
+//
+document.body.insertBefore(error1, input2);
+document.body.insertBefore(error2, button);
+//
 
-let res = document.createElement('div')
-res.id = 'result'
-
-button.addEventListener('click', function(e) {
-
-if(!isDec(input1.value)){
-document.body.insertBefore(error1, input2)
-} else { error1.remove() }
-
-if(!isDec(input2.value)){
-document.body.insertBefore(error2, button)
-} else { error2.remove() }
-
-if(isDec(input1.value) && isDec(input2.value)){
-res.textContent = +input1.value + +input2.value
-if(res.parentNode != document.body) document.body.appendChild(res)
-		}
-
-})
+error1.textContent = 'this is not a number';
+error1.style.display = 'none';
+input1.id = '1';
+input2.id = '2';
+error2.textContent = 'this is not a number';
+error2.style.display = 'none';
+input1.style.display = input2.style.display = button.style.display = 'block';
+let resultDiv = document.createElement('div');
+let result = document.createElement('div')
+result.id = 'result'
 
 
-function isDec(num) {
-	if(isFinite(num) && /^\d*\.?\d*$/.test(num.toString())) return true;
-	return false;
-}
+button.onclick = function() {
+(error1.style.display = 'none'), (error2.style.display = 'none');
+resultDiv.textContent = '';
+if (!isFinite(input1.value)) {
+error1.style.display = 'block';
+ }
+if (!isFinite(input2.value)) {
+error2.style.display = 'block';
+}; if(isFinite(input1.value) && isFinite(input2.value))  {
+result = Number(input1.value) + Number(input2.value);
+resultDiv.textContent = result;
+ document.body.appendChild(resultDiv) }}
